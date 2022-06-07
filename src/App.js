@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Accordion} from 'react-bootstrap';
+import {Accordion, Container, Card} from 'react-bootstrap';
 
 class App extends React.Component {
   constructor(props) {
@@ -25,14 +25,13 @@ class App extends React.Component {
   }
   render() {
     let productsToRender = this.state.productsData.map((prod, idx) =>
-      <Accordion>
         <Accordion.Item eventKey="0">
           <Accordion.Header>{prod.brand}</Accordion.Header>
           <Accordion.Body>
           {prod.name}-${prod.price}-MADE IN:{prod.origin}-QTY:{prod.qty}
           </Accordion.Body>
-        </Accordion.Item>
-      </Accordion>);
+        </Accordion.Item>);
+     
     return (
       <>
         <h1>Quick Store</h1>
@@ -42,7 +41,16 @@ class App extends React.Component {
         {
           this.state.productsData.length > 0 &&
           <>
-            {productsToRender}
+          <Container>
+            <Card className="cardClass">
+              <Card.Body>
+                <Accordion className="accord">
+                  {productsToRender}
+                </Accordion>
+              </Card.Body>
+            </Card>
+          </Container>
+            
           </>
         }
       </>
